@@ -114,7 +114,8 @@ class IDE(command.Command):
             conn_parameters = {'conn_str': [engine.url.database]}
         elif engine.url.drivername.startswith('postgresql'):
             adapter = 'postgres'
-            conn_parameters = {'conn_str': [str(engine.url.set(drivername=adapter))]}
+            conn_parameters = {'conn_str': [engine.url.set(drivername=adapter).render_as_string(hide_password=False)]}
+
         elif engine.url.drivername.startswith('mysql'):
             adapter = 'mysql'
 
